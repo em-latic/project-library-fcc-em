@@ -93,7 +93,7 @@ suite('Functional Tests', function() {
         chai.request(server)
         .get('/api/books/invalididnotindb')
         .end(function(err, res){
-          assert.equal(res.status, 204);
+          assert.equal(res.status, 200);
           assert.equal(res.text, 'no book exists');
           done();
         })
@@ -148,7 +148,7 @@ suite('Functional Tests', function() {
         .post(`/api/books/invalididnotindb`)
         .send({ comment: "Test comment. No book should exist." })
         .end(function(err, res){
-          assert.equal(res.status, 204);
+          assert.equal(res.status, 200);
           assert.equal(res.text, 'no book exists');
           done();
         })
@@ -174,7 +174,7 @@ suite('Functional Tests', function() {
         .delete('/api/books/invalididnotindb')
         .send({ })
         .end(function(err, res){
-          assert.equal(res.status, 204);
+          assert.equal(res.status, 200);
           assert.equal(res.text, 'no book exists');
           done();
         })
