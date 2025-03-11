@@ -36,7 +36,7 @@ module.exports = function (app) {
     .post(async function (req, res){
       let title = req.body.title;
       if(!title){
-        return res.status(400).send("missing required field title");
+        return res.status(200).send("missing required field title"); //400
       }
       //response will contain new book object including atleast _id and title
       try{
@@ -72,7 +72,7 @@ module.exports = function (app) {
         const book = await getBookById(bookid);
 
         if(book?.error || !book){
-          return res.status(404).send("no book exists");
+          return res.status(200).send("no book exists"); //404
         }
         else{
           return res.status(200).json(book);
@@ -91,10 +91,10 @@ module.exports = function (app) {
       try{
         const book = await addComment(bookid, comment);
         if(!comment){
-          return res.status(400).send("missing required field comment");
+          return res.status(200).send("missing required field comment"); //400
         }
         if(book?.error || !book){
-          return res.status(404).send("no book exists");
+          return res.status(200).send("no book exists"); //404
         }
         res.status(200).json(book);
       }
@@ -111,7 +111,7 @@ module.exports = function (app) {
         const book = await deleteBook(bookid);
 
         if(book?.error || !book){
-          return res.status(404).send("no book exists");
+          return res.status(200).send("no book exists"); //404
         }
         res.status(200).send("delete successful");
       } 
